@@ -5,7 +5,7 @@ close all;
 %%
 % Initialize
 
-sampleNum = 100;
+sampleNum = 80;
 sampleDim = 1;
 sigma = 1;
 priorSigma = eye(sampleDim);
@@ -28,15 +28,23 @@ end
 for i = 1:length
     real(i) = fun(xx(i));
 end
-% 
+
+% standard GPR 
 % xPredict = X(1);
 % for i = 1:length
 %     predictData(i,:) = GP(X,Y,sigma,xx(i),RBFParameter);
 % end
 
+% Iterative GPR
+% for i = 1:length
+%     predictData(i,:) = IterativeGP(X,Y,sigma,xx(i),RBFParameter);
+% end
+
+% Iterative and forgetive GPR
 for i = 1:length
-    predictData(i,:) = IterativeGP(X,Y,sigma,xx(i),RBFParameter);
+    predictData(i,:) = IterForgetGP(X,Y,sigma,xx(i),RBFParameter,100);
 end
+
 % realValue = fun(xPredict)
 % mu_
 % error = (realValue - mu_)/realValue;
